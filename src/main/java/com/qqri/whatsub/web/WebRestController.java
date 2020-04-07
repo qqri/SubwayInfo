@@ -1,6 +1,7 @@
 package com.qqri.whatsub.web;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.BufferedReader;
@@ -19,28 +20,40 @@ public class WebRestController {
         return "HelloWorld";
     }
 
-    @GetMapping("/linktest")
-    public void callsubinfo() {
-        BufferedReader br = null;
-        try {
-            String urlstr = "http://openapi.airkorea.or.kr/"
-                    + "openapi/services/rest/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty"
-                    + "?stationName=수내동&dataTerm=month&pageNo=1&numOfRows=10&ServiceKey=서비스키&ver=1.3";
-            URL url = new URL(urlstr);
-            HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
-            urlconnection.setRequestMethod("GET");
-            br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+//startX : 126.83948388112836
+//endX : 127.01460762172958
+    //linktest/126.83948388112836/127.01460762172958
+    @GetMapping("/linktest/{startX}/{endX}")
+    public String callsubinfo(@PathVariable String startX , @PathVariable String endX) {
             String result = "";
-            String line;
-            while ((line = br.readLine()) != null) {
-                result = result + line + "\n";
-            }
-            System.out.println(result);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
+            try {
+                String urlstr = "http://ws.bus.go.kr/api/rest/pathinfo/getPathInfoBySubway?"
+                        + "ServiceKey=7zK7Rds8ETOIwmmgO1ae5P0OzG5b78pdijQjLOAVIyYWx5gl8TS8ErHvmL376wcwKZexqP78UEupaKxoRXKG%2FQ%3D%3D"
+                        + "&startX=" + startX
+                        + "&startY=37.558210971753226"
+                        + "&endX=" + endX
+                        + "&endY=37.57250" ;
+                URL url = new URL(urlstr);
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setRequestMethod("GET");
 
+                BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "UTF-8"));
+
+                String returnLine;
+                //result += "<xmp>";
+
+                while ((returnLine = br.readLine()) != null) {
+                    result += returnLine;
+                    result += "\n" ;
+                }
+
+                urlConnection.disconnect();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return result + "</xmp>";
+        }
 
         @GetMapping("/apitest")
         public String callapihttp () throws IOException {
