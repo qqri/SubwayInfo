@@ -1,10 +1,9 @@
 package com.qqri.whatsub;
-
-
+/*
 import com.qqri.whatsub.domain.posts.Posts;
 import com.qqri.whatsub.domain.posts.PostsRepository;
-import com.qqri.whatsub.web.dto.PostsSaveRequestDto;
-import com.qqri.whatsub.web.dto.PostsUpdateRequestDto;
+import com.qqri.whatsub.domain.posts.PostsRepository;
+import com.qqri.whatsub.web.dto.*;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -101,3 +100,4 @@ public class PostsApiControllerTest {
     }
 
 }
+*/
