@@ -5,6 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class IndexController {
+    @GetMapping("/sub")
+    public String tohome() {
+        return "subway";
+    }
 
     @GetMapping("/")
     public String index(){
@@ -14,5 +18,7 @@ public class IndexController {
     @GetMapping("/posts/save")
     public String postsSave(){
         return "posts-save";
+
+
     }
 }
