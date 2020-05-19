@@ -1,26 +1,26 @@
 package com.qqri.whatsub.web.dto;
 
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Getter
+@Data
 @NoArgsConstructor
 public class SubwayRequest {
-    String KEY;
-    String TYPE;
-    String SERVICE;
-    int START_INDEX;
-    int END_INDEX;
-    String STATION_CD;
+    String key;
+    String type;
+    String service;
+    int start_index;
+    int end_index;
+    String station_cd;
 
     @Builder
-    public SubwayRequest(String KEY, String TYPE, String SERVICE, int START_INDEX, int END_INDEX, String STATION_CD) {
-        this.KEY = KEY;
-        this.TYPE = TYPE;
-        this.SERVICE = SERVICE;
-        this.START_INDEX = START_INDEX;
-        this.END_INDEX = END_INDEX;
-        this.STATION_CD = STATION_CD;
+    public SubwayRequest(String key, String type, String service, int start_index, int end_index, String station_cd) {
+        this.key = key;
+        this.type = type;
+        this.service = service;
+        this.start_index = start_index;
+        this.end_index = end_index;
+        this.station_cd = station_cd;
     }
 }
