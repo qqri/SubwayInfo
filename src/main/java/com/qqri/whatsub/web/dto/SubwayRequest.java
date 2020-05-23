@@ -12,15 +12,15 @@ public class SubwayRequest {
     String service;
     int start_index;
     int end_index;
-    String station_cd;
+    String station_nm;
 
     @Builder
-    public SubwayRequest(String key, String type, String service, int start_index, int end_index, String station_cd) {
+    public SubwayRequest(String key, String type, String service, int start_index, int end_index, String station_nm) {
         this.key = key;
         this.type = type;
         this.service = service;
         this.start_index = start_index;
         this.end_index = end_index;
-        this.station_cd = station_cd;
+        this.station_nm = station_nm;
     }
 }
