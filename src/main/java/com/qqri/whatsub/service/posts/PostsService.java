@@ -2,12 +2,16 @@ package com.qqri.whatsub.service.posts;
 
 import com.qqri.whatsub.domain.posts.Posts;
 import com.qqri.whatsub.domain.posts.PostsRepository;
+import com.qqri.whatsub.web.dto.PostsListResponseDto;
 import com.qqri.whatsub.web.dto.PostsResponseDto;
 import com.qqri.whatsub.web.dto.PostsSaveRequestDto;
 import com.qqri.whatsub.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -46,5 +50,12 @@ public class PostsService {
                 .orElseThrow(() -> new
                         IllegalArgumentException("해당 게시글이 없습니다. id =" + id));
         return new PostsResponseDto(entity);
+    }
+
+    @Transactional(readOnly = true)
+    public List<PostsListResponseDto> findAllDesc(){
+        return postsRepository.findAllDesc().stream()
+                .map(PostsListResponseDto :: new)
+                .collect(Collectors.toList());
     }
 }
