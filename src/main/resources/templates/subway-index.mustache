@@ -1,0 +1,60 @@
+<!DOCTYPE>
+<html>
+<head>
+    <title>지하철 도착 정보 - 2호선</title>
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#btn').on("click", function(){
+            var form = {
+                "key": "6a514b775a63716f39345544627262",
+                "type": "json",
+                "service": "realtimeStationArrival",
+                "start_index": 0,
+                "end_index": 5,
+                "station_nm": "사당"
+            }
+            $.ajax({
+                url: "getData",
+                type: "POST",
+                data: JSON.stringify(form),
+                contentType: "application/json; charset=utf-8;",
+                dataType: "json",
+                success: function(data){
+                    console.log(data.response.body.items);
+                    $('#tbody').append("<tr>");
+                    appendingText(data.response.body.items.item.realtimeStationArrival.row.trainLineNm);
+                    appendingText(data.response.body.items.item.realtimeStationArrival.row.subwayHeading);
+                    appendingText(data.response.body.items.item.realtimeStationArrival.row.recptnDt);
+                    appendingText(data.response.body.items.item.realtimeStationArrival.row.arvlMsg3);
+                    $('#tbody').append("</tr>");
+                },
+                error: function(){
+                    alert("err");
+                }
+            });
+        });
+    });
+
+    function appendingText(txt){
+        var tag = "<td>" + txt + "</td>";
+        $('#tbody').append(tag);
+    }
+</script>
+    <body>
+
+    <button id="btn">btn</button>
+        <table border="1">
+            <thead>
+            <tr>
+                <td>가는 방향 trainLineNm</td>
+                <td>내리는 방향 subwayHeading</td>
+                <td>도착 시간 recptnDt</td>
+                <td>도착 정보 arvlMsg3</td>
+            </thead>
+            <tbody id="tbody"></tbody>
+        </table>
+    </body>
+{{>layout/footer}}

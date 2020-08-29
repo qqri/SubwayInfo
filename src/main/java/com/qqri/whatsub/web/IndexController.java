@@ -25,9 +25,9 @@ public class IndexController {
         return "index";
     }
 
-    @GetMapping("/sub")
-    public String tohome() {
-        return "subway";
+    @GetMapping("/subway")
+    public String toSubway() {
+        return "subway-index";
     }
 
 
