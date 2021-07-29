@@ -35,7 +35,7 @@ public class SubwayService {
                 .queryParam("STATION_CD", request.getStation_nm())
                 .build(false);    //자동으로 encode해주는 것을 막기 위해 false
 
-        Object response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, new HttpEntity<String>(headers), String.class);
+        Object response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET , new HttpEntity<String>(headers), String.class);
         return response;
     }
 
